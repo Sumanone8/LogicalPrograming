@@ -1,37 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.Write("Enter the number of distinct coupon numbers: ");
-        int numCoupons = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Stopwatch Program");
+        Console.WriteLine("------------------");
+        Console.WriteLine("Press any key to start the stopwatch...");
+        Console.ReadKey();
 
-        int totalRandomNumbersNeeded = GenerateDistinctCoupons(numCoupons);
+        DateTime startTime = DateTime.Now;
 
-        Console.WriteLine($"Total random numbers needed to have all distinct coupons: {totalRandomNumbersNeeded}");
-    }
+        Console.WriteLine("Stopwatch started. Press any key to stop...");
+        Console.ReadKey();
 
-    static int GenerateDistinctCoupons(int numCoupons)
-    {
-        Random random = new Random();
-        HashSet<int> distinctCoupons = new HashSet<int>();
-        int totalRandomNumbersNeeded = 0;
+        DateTime endTime = DateTime.Now;
 
-        while (distinctCoupons.Count < numCoupons)
-        {
-            int randomNumber = random.Next(1, numCoupons + 1);
+        TimeSpan elapsedTime = endTime - startTime;
 
-            if (!distinctCoupons.Contains(randomNumber))
-            {
-                distinctCoupons.Add(randomNumber);
-            }
-
-            totalRandomNumbersNeeded++;
-        }
-
-        return totalRandomNumbersNeeded;
+        Console.WriteLine($"Elapsed time: {elapsedTime.TotalSeconds} seconds");
     }
 }
-
