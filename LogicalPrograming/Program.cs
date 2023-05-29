@@ -2,28 +2,41 @@
 
 class Util
 {
-    public static void dayOfWeek(int m, int d, int y)
+    public static void temperatureConversion(double temperature, string fromUnit)
     {
-        int y0 = y - (14 - m) / 12;
-        int x = y0 + y0 / 4 - y0 / 100 + y0 / 400;
-        int m0 = m + 12 * ((14 - m) / 12) - 2;
-        int d0 = (d + x + 31 * m0 / 12) % 7;
+        double convertedTemperature;
+        string toUnit;
 
-        Console.WriteLine($"The day of the week for {m}/{d}/{y} is {d0}");
+        if (fromUnit.ToLower() == "celsius")
+        {
+            convertedTemperature = (temperature * 9 / 5) + 32;
+            toUnit = "Fahrenheit";
+        }
+        else if (fromUnit.ToLower() == "fahrenheit")
+        {
+            convertedTemperature = (temperature - 32) * 5 / 9;
+            toUnit = "Celsius";
+        }
+        else
+        {
+            Console.WriteLine("Invalid temperature unit. Please specify either Celsius or Fahrenheit.");
+            return;
+        }
+
+        Console.WriteLine($"{temperature} {fromUnit} is equivalent to {convertedTemperature} {toUnit}.");
     }
 
     static void Main(string[] args)
     {
-        if (args.Length < 3)
+        if (args.Length < 2)
         {
-            Console.WriteLine("Invalid number of arguments. Please provide month, day, and year as command-line arguments.");
+            Console.WriteLine("Invalid number of arguments. Please provide temperature and unit (Celsius or Fahrenheit) as command-line arguments.");
             return;
         }
 
-        int m = Convert.ToInt32(args[0]);
-        int d = Convert.ToInt32(args[1]);
-        int y = Convert.ToInt32(args[2]);
+        double temperature = Convert.ToDouble(args[0]);
+        string fromUnit = args[1];
 
-        dayOfWeek(m, d, y);
+        temperatureConversion(temperature, fromUnit);
     }
 }
