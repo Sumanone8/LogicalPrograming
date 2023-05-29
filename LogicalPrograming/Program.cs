@@ -7,30 +7,32 @@ class Program
         Console.Write("Enter a number: ");
         int number = Convert.ToInt32(Console.ReadLine());
 
-        if (IsPerfectNumber(number))
+        if (IsPrime(number))
         {
-            Console.WriteLine("The number is a perfect number.");
+            Console.WriteLine("The number is prime.");
         }
         else
         {
-            Console.WriteLine("The number is not a perfect number.");
+            Console.WriteLine("The number is not prime.");
         }
     }
 
-    static bool IsPerfectNumber(int number)
+    static bool IsPrime(int number)
     {
-        int sum = 0;
+        if (number <= 1)
+        {
+            return false;
+        }
 
-        // Find the proper divisors and calculate their sum
-        for (int i = 1; i < number; i++)
+        // Check divisibility up to the square root of the number
+        for (int i = 2; i * i <= number; i++)
         {
             if (number % i == 0)
             {
-                sum += i;
+                return false;
             }
         }
 
-        // Check if the sum of divisors is equal to the number
-        return sum == number;
+        return true;
     }
 }
