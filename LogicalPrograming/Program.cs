@@ -1,44 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 
-class Program
+class Util
 {
-    static int[] notes = { 1000, 500, 100, 50, 10, 5, 2, 1 };
+    public static void dayOfWeek(int m, int d, int y)
+    {
+        int y0 = y - (14 - m) / 12;
+        int x = y0 + y0 / 4 - y0 / 100 + y0 / 400;
+        int m0 = m + 12 * ((14 - m) / 12) - 2;
+        int d0 = (d + x + 31 * m0 / 12) % 7;
+
+        Console.WriteLine($"The day of the week for {m}/{d}/{y} is {d0}");
+    }
 
     static void Main(string[] args)
     {
-        Console.Write("Enter the change amount in Rs: ");
-        int change = Convert.ToInt32(Console.ReadLine());
-
-        List<int> changeNotes = CalculateChange(change);
-        int numNotes = changeNotes.Count;
-
-        Console.WriteLine($"Minimum number of notes: {numNotes}");
-        Console.WriteLine("Change notes: ");
-        foreach (int note in changeNotes)
+        if (args.Length < 3)
         {
-            Console.Write(note + " ");
-        }
-    }
-
-    static List<int> CalculateChange(int change)
-    {
-        List<int> changeNotes = new List<int>();
-
-        int index = 0;
-        while (change > 0 && index < notes.Length)
-        {
-            if (change >= notes[index])
-            {
-                changeNotes.Add(notes[index]);
-                change -= notes[index];
-            }
-            else
-            {
-                index++;
-            }
+            Console.WriteLine("Invalid number of arguments. Please provide month, day, and year as command-line arguments.");
+            return;
         }
 
-        return changeNotes;
+        int m = Convert.ToInt32(args[0]);
+        int d = Convert.ToInt32(args[1]);
+        int y = Convert.ToInt32(args[2]);
+
+        dayOfWeek(m, d, y);
     }
 }
