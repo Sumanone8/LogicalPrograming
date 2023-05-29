@@ -4,29 +4,33 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.Write("Enter the number of terms in the Fibonacci series: ");
-        int n = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Enter a number: ");
+        int number = Convert.ToInt32(Console.ReadLine());
 
-        Console.WriteLine("Fibonacci Series:");
-        PrintFibonacciSeries(n);
+        if (IsPerfectNumber(number))
+        {
+            Console.WriteLine("The number is a perfect number.");
+        }
+        else
+        {
+            Console.WriteLine("The number is not a perfect number.");
+        }
     }
 
-    static void PrintFibonacciSeries(int n)
+    static bool IsPerfectNumber(int number)
     {
-        int num1 = 0;
-        int num2 = 1;
+        int sum = 0;
 
-        Console.Write($"{num1} {num2} ");
-
-        for (int i = 2; i < n; i++)
+        // Find the proper divisors and calculate their sum
+        for (int i = 1; i < number; i++)
         {
-            int nextNum = num1 + num2;
-            Console.Write($"{nextNum} ");
-
-            num1 = num2;
-            num2 = nextNum;
+            if (number % i == 0)
+            {
+                sum += i;
+            }
         }
 
-        Console.WriteLine();
+        // Check if the sum of divisors is equal to the number
+        return sum == number;
     }
 }
