@@ -7,32 +7,23 @@ class Program
         Console.Write("Enter a number: ");
         int number = Convert.ToInt32(Console.ReadLine());
 
-        if (IsPrime(number))
-        {
-            Console.WriteLine("The number is prime.");
-        }
-        else
-        {
-            Console.WriteLine("The number is not prime.");
-        }
+        int reversedNumber = ReverseNumber(number);
+
+        Console.WriteLine($"The reversed number is: {reversedNumber}");
     }
 
-    static bool IsPrime(int number)
+    static int ReverseNumber(int number)
     {
-        if (number <= 1)
+        int reversedNumber = 0;
+
+        while (number != 0)
         {
-            return false;
+            int remainder = number % 10;
+            reversedNumber = reversedNumber * 10 + remainder;
+            number /= 10;
         }
 
-        // Check divisibility up to the square root of the number
-        for (int i = 2; i * i <= number; i++)
-        {
-            if (number % i == 0)
-            {
-                return false;
-            }
-        }
-
-        return true;
+        return reversedNumber;
     }
 }
+
